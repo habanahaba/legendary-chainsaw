@@ -38,7 +38,7 @@ object GameCli {
     )
 
     fun run() {
-        val game = Game(playerA, playerB, gridWidth = 4, gridHeight = 4, lineLength = 3)
+        val game = Game(playerA, playerB, gridWidth = 6, gridHeight = 7, lineLength = 4)
         session {
             val nextCol = liveVarOf(-1)
             section {
@@ -47,7 +47,7 @@ object GameCli {
                     nextCol.value = -1
                 }
 
-                renderGame(game)
+                renderGrid(game)
 
                 when (val o = game.outcome) {
                     is Win -> {
@@ -91,7 +91,7 @@ object GameCli {
         }
     }
 
-    private fun MainRenderScope.renderGame(game: Game) {
+    private fun MainRenderScope.renderGrid(game: Game) {
         grid(Cols.uniform(game.grid.width, 4)) {
             for (row in 0 until game.grid.height) {
                 for (col in 0 until game.grid.width) {

@@ -31,10 +31,6 @@ class GridImpl<T>(override val width: Int, override val height: Int, private val
     private var freeSlots = this.height * this.width
 
     override fun dropToken(col: Int, token: T): GridUpdate {
-        if (freeSlots == 0) {
-            return GridFull
-        }
-
         if (!isValidColumn(col)) {
             return NotAllowed
         }
@@ -48,7 +44,12 @@ class GridImpl<T>(override val width: Int, override val height: Int, private val
         column.add(token)
         freeSlots--
 
-        return detectLine(height - column.size, col, token)
+        return when (val d = detectLine(height - column.size, col, token)) {
+            LineIncomplete -> {
+                if (freeSlots == 0) GridFull else LineIncomplete
+            }
+            else -> d
+        }
     }
 
     override fun tokenAt(row: Int, col: Int): T? {
