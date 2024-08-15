@@ -1,4 +1,4 @@
-package org.hnh.mv
+package org.hnh.mv.cli
 
 import com.varabyte.kotter.foundation.input.Keys
 import com.varabyte.kotter.foundation.input.input
@@ -16,8 +16,10 @@ import com.varabyte.kotter.runtime.MainRenderScope
 import com.varabyte.kotterx.grid.Cols
 import com.varabyte.kotterx.grid.grid
 import com.varabyte.kotterx.text.Justification.CENTER
+import org.hnh.mv.Game
 import org.hnh.mv.Outcome.Draw
 import org.hnh.mv.Outcome.Win
+import org.hnh.mv.Player
 
 fun main() {
     GameCli.run()
